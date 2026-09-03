@@ -1,0 +1,2003 @@
+{
+ "schema": "subtitle-conformance-vectors/1",
+ "counts": {
+  "srt": {
+   "valid": 8,
+   "tolerated": 19,
+   "error": 8,
+   "perf": 1
+  },
+  "vtt": {
+   "valid": 10,
+   "tolerated": 11,
+   "error": 7,
+   "perf": 1
+  },
+  "ass": {
+   "valid": 10,
+   "tolerated": 17,
+   "error": 5,
+   "perf": 1
+  }
+ },
+ "vectors": [
+  {
+   "id": "SRT01",
+   "file": "fixtures/srt/canonical-basic.srt",
+   "format": "srt",
+   "kind": "valid",
+   "len": 171,
+   "sha256": "b3bb30feff8699c4f7aade1cd89a0a1328ac75cef30d960660512fcb94faad22",
+   "expect": {
+    "cues": 3,
+    "first": [
+     1000,
+     4000,
+     "Hello, world."
+    ],
+    "last": [
+     60000,
+     62000,
+     "<i>Italic</i> and <b>bold</b>."
+    ],
+    "indices": [
+     1,
+     2,
+     3
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30342c3030300a48656c6c6f2c20776f726c642e0a0a320a30303a30303a30342c353030202d2d3e2030303a30303a30362c3235300a5365636f6e64206375650a776974682074776f206c696e65732e0a0a330a30303a30313a30302c303030202d2d3e2030303a30313a30322c3030300a3c693e4974616c69633c2f693e20616e64203c623e626f6c643c2f623e2e0a0a"
+  },
+  {
+   "id": "SRT02",
+   "file": "fixtures/srt/canonical-tags.srt",
+   "format": "srt",
+   "kind": "valid",
+   "len": 287,
+   "sha256": "b9f2f869cb7d5092565950f4c0bab68b7ed842db46fdeb6de1188e265ce7d788",
+   "expect": {
+    "cues": 4,
+    "first": [
+     0,
+     1000,
+     "<b><i>nested</i></b> <u>u</u> <s>s</s>"
+    ],
+    "last": [
+     3000,
+     4000,
+     "&amp; &lt;3 &gt; literal entities"
+    ],
+    "warnings": [],
+    "canonical": true,
+    "tags_preserved_raw": true
+   },
+   "hex": "310a30303a30303a30302c303030202d2d3e2030303a30303a30312c3030300a3c623e3c693e6e65737465643c2f693e3c2f623e203c753e753c2f753e203c733e733c2f733e0a0a320a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a3c666f6e7420636f6c6f723d2223666630303030223e7265643c2f666f6e743e203c666f6e7420636f6c6f723d2279656c6c6f77223e6e616d65643c2f666f6e743e0a0a330a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300a7b5c616e387d746f70206c696e650a0a340a30303a30303a30332c303030202d2d3e2030303a30303a30342c3030300a26616d703b20266c743b33202667743b206c69746572616c20656e7469746965730a0a"
+  },
+  {
+   "id": "SRT03",
+   "file": "fixtures/srt/canonical-position-ext.srt",
+   "format": "srt",
+   "kind": "valid",
+   "len": 109,
+   "sha256": "a5e06e8a80a7870959bc538f58df3741d38843ddfeaea88b3d01798ce70b347b",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     "Positioned"
+    ],
+    "settings": [
+     "X1:100 X2:300 Y1:20 Y2:60",
+     null
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030302058313a3130302058323a3330302059313a32302059323a36300a506f736974696f6e65640a0a320a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300a506c61696e0a0a"
+  },
+  {
+   "id": "SRT04",
+   "file": "fixtures/srt/canonical-cjk-emoji.srt",
+   "format": "srt",
+   "kind": "valid",
+   "len": 190,
+   "sha256": "49dea504e187371be6463d5285b3f1d68ef9c5552b8fb49ec676bed3d7f61c6e",
+   "expect": {
+    "cues": 3,
+    "first": [
+     1000,
+     2000,
+     "日本語の字幕です。"
+    ],
+    "last": [
+     3000,
+     4000,
+     "Zażółć gęślą jaźń — élan"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300ae697a5e69cace8aa9ee381aee5ad97e5b995e381a7e38199e380820a0a320a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300aed959ceab5adec96b420ec9e90eba78920f09f8eacf09f8dbf0a0a330a30303a30303a30332c303030202d2d3e2030303a30303a30342c3030300a5a61c5bcc3b3c582c4872067c499c59b6cc485206a61c5bac58420e2809420c3a96c616e0a0a"
+  },
+  {
+   "id": "SRT05",
+   "file": "fixtures/srt/canonical-over-24h.srt",
+   "format": "srt",
+   "kind": "valid",
+   "len": 89,
+   "sha256": "fe0089573d1d681821e674f34482dc4dbfce106318ffd6a38de2243180c0e1d6",
+   "expect": {
+    "cues": 2,
+    "first": [
+     90000000,
+     90001500,
+     "Day two"
+    ],
+    "last": [
+     446399999,
+     446400000,
+     "Five days in"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "310a32353a30303a30302c303030202d2d3e2032353a30303a30312c3530300a4461792074776f0a0a320a3132333a35393a35392c393939202d2d3e203132343a30303a30302c3030300a46697665206461797320696e0a0a"
+  },
+  {
+   "id": "SRT06",
+   "file": "fixtures/srt/canonical-overlap.srt",
+   "format": "srt",
+   "kind": "valid",
+   "len": 143,
+   "sha256": "c4f61ebfd4667cb15193352f0e4c5cd7de64aaf981a7755a3b4c7f6f25f27ecb",
+   "expect": {
+    "cues": 3,
+    "order": [
+     1000,
+     2000,
+     4000
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30352c3030300a4c6f6e67206375650a0a320a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300a496e73696465207468652066697273740a0a330a30303a30303a30342c303030202d2d3e2030303a30303a30362c3030300a5374726164646c65732074686520656e640a0a"
+  },
+  {
+   "id": "SRT07",
+   "file": "fixtures/srt/canonical-empty-text-cue.srt",
+   "format": "srt",
+   "kind": "valid",
+   "len": 86,
+   "sha256": "c828f29d249fb27f594985fad18d71e0e324063037b1fccb34dc9d7103e51156",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     ""
+    ],
+    "last": [
+     2000,
+     3000,
+     "After the empty one"
+    ],
+    "warnings": [
+     "EmptyCue"
+    ],
+    "canonical": true
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a0a320a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300a41667465722074686520656d707479206f6e650a0a"
+  },
+  {
+   "id": "SRT08",
+   "file": "fixtures/srt/realworld-crlf.srt",
+   "format": "srt",
+   "kind": "valid",
+   "len": 518,
+   "sha256": "e4f0332e2661cf3942d6388d1f2b16187c2e58d89b29e7108685851640d0e223",
+   "expect": {
+    "cues": 8,
+    "first": [
+     2340,
+     5120,
+     "<i>(distant thunder)</i>"
+    ],
+    "last": [
+     23090,
+     25400,
+     "♪ soft piano ♪"
+    ],
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "same bytes with \\r\\n replaced by \\n"
+   },
+   "hex": "310d0a30303a30303a30322c333430202d2d3e2030303a30303a30352c3132300d0a3c693e2864697374616e74207468756e646572293c2f693e0d0a0d0a320d0a30303a30303a30352c383830202d2d3e2030303a30303a30382c3731300d0a596f75207361696420796f7527642062652068657265206279206e696e652e0d0a0d0a330d0a30303a30303a30382c373930202d2d3e2030303a30303a31312c3034300d0a2d204920676f742068656c642075702e0d0a2d20427920776861743f0d0a0d0a340d0a30303a30303a31312c313230202d2d3e2030303a30303a31332c3935300d0a547261666669632e20546865206272696467652077617320636c6f7365642e0d0a0d0a350d0a30303a30303a31342c303330202d2d3e2030303a30303a31372c3232300d0a3c666f6e7420636f6c6f723d2223303066666666223e5b70686f6e652062757a7a696e675d3c2f666f6e743e0d0a0d0a360d0a30303a30303a31372c333030202d2d3e2030303a30303a31392c3630300d0a446f6e277420616e7377657220746861742e0d0a0d0a370d0a30303a30303a31392c363830202d2d3e2030303a30303a32332c3031300d0a49742773206865722e2049206861766520746f2e0d0a0d0a380d0a30303a30303a32332c303930202d2d3e2030303a30303a32352c3430300d0ae299aa20736f6674207069616e6f20e299aa0d0a0d0a"
+  },
+  {
+   "id": "SRT10",
+   "file": "fixtures/srt/lenient-bom-crlf.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 187,
+   "sha256": "028d96a6fe41d2d9eeb2dad8962e5acd30b8a608a7887da5ba9560a6adfa0be8",
+   "expect": {
+    "cues": 3,
+    "first": [
+     1000,
+     4000,
+     "Hello, world."
+    ],
+    "warnings": [
+     "BomStripped"
+    ],
+    "canonical": false,
+    "canonical_form": "SRT01 bytes"
+   },
+   "hex": "efbbbf310d0a30303a30303a30312c303030202d2d3e2030303a30303a30342c3030300d0a48656c6c6f2c20776f726c642e0d0a0d0a320d0a30303a30303a30342c353030202d2d3e2030303a30303a30362c3235300d0a5365636f6e64206375650d0a776974682074776f206c696e65732e0d0a0d0a330d0a30303a30313a30302c303030202d2d3e2030303a30313a30322c3030300d0a3c693e4974616c69633c2f693e20616e64203c623e626f6c643c2f623e2e0d0a0d0a"
+  },
+  {
+   "id": "SRT11",
+   "file": "fixtures/srt/lenient-cr-only.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 171,
+   "sha256": "386ced95bfeb949a5b4a4bf19a190e27538883691fbcd1c37d127fe73aa7d7aa",
+   "expect": {
+    "cues": 3,
+    "first": [
+     1000,
+     4000,
+     "Hello, world."
+    ],
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "SRT01 bytes"
+   },
+   "hex": "310d30303a30303a30312c303030202d2d3e2030303a30303a30342c3030300d48656c6c6f2c20776f726c642e0d0d320d30303a30303a30342c353030202d2d3e2030303a30303a30362c3235300d5365636f6e64206375650d776974682074776f206c696e65732e0d0d330d30303a30313a30302c303030202d2d3e2030303a30313a30322c3030300d3c693e4974616c69633c2f693e20616e64203c623e626f6c643c2f623e2e0d0d"
+  },
+  {
+   "id": "SRT12",
+   "file": "fixtures/srt/lenient-no-trailing-newline.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 169,
+   "sha256": "786b7745aeb9a0acab97311f018f799ab07bcca82f39ab1a079ecab2ac055bde",
+   "expect": {
+    "cues": 3,
+    "last": [
+     60000,
+     62000,
+     "<i>Italic</i> and <b>bold</b>."
+    ],
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "SRT01 bytes"
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30342c3030300a48656c6c6f2c20776f726c642e0a0a320a30303a30303a30342c353030202d2d3e2030303a30303a30362c3235300a5365636f6e64206375650a776974682074776f206c696e65732e0a0a330a30303a30313a30302c303030202d2d3e2030303a30313a30322c3030300a3c693e4974616c69633c2f693e20616e64203c623e626f6c643c2f623e2e"
+  },
+  {
+   "id": "SRT13",
+   "file": "fixtures/srt/lenient-dot-millis.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 107,
+   "sha256": "1f643152ae0e9b9cf524b10a1df0957518b979baa189707225e1354cd7a0c7c6",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     4000,
+     "Hello, world."
+    ],
+    "last": [
+     4500,
+     6250,
+     "Second cue\nwith two lines."
+    ],
+    "warnings": [
+     "DotMillis"
+    ],
+    "canonical": false,
+    "canonical_form": "same with , separators"
+   },
+   "hex": "310a30303a30303a30312e303030202d2d3e2030303a30303a30342e3030300a48656c6c6f2c20776f726c642e0a0a320a30303a30303a30342e353030202d2d3e2030303a30303a30362e3235300a5365636f6e64206375650a776974682074776f206c696e65732e0a0a"
+  },
+  {
+   "id": "SRT14",
+   "file": "fixtures/srt/lenient-missing-index.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 85,
+   "sha256": "0b1dec0c2234664448a8fb51d719ab21a2467a64f1beeaab393f767d6719e9f6",
+   "expect": {
+    "cues": 2,
+    "indices": [
+     null,
+     null
+    ],
+    "first": [
+     1000,
+     2000,
+     "No index here"
+    ],
+    "warnings": [
+     "MissingIndex"
+    ],
+    "canonical": false,
+    "canonical_form": "renumbered 1,2"
+   },
+   "hex": "30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a4e6f20696e64657820686572650a0a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300a4e6f7220686572650a0a"
+  },
+  {
+   "id": "SRT15",
+   "file": "fixtures/srt/lenient-issue11-stray-digits.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 80,
+   "sha256": "fe8f743fb9c1bb808e9f72544761007b189e18525365fa7184d066891d1bc622",
+   "expect": {
+    "cues": 2,
+    "first": [
+     6000,
+     12074,
+     "text1\n\n2"
+    ],
+    "last": [
+     709412,
+     712858,
+     "text2"
+    ],
+    "warnings": [
+     "StrayText"
+    ],
+    "canonical": false
+   },
+   "hex": "310a30303a30303a30362c303030202d2d3e2030303a30303a31322c3037340a74657874310a0a320a0a320a30303a31313a34392c343132202d2d3e2030303a31313a35322c3835380a74657874320a"
+  },
+  {
+   "id": "SRT16",
+   "file": "fixtures/srt/lenient-issue10-blank-then-text.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 100,
+   "sha256": "324a7674491c29244f6035b31b84f4c65a180b731943188aae50ffe534654a16",
+   "expect": {
+    "cues": 2,
+    "first": [
+     2788703,
+     2790288,
+     ""
+    ],
+    "indices": [
+     857,
+     858
+    ],
+    "warnings": [
+     "EmptyCue",
+     "StrayText"
+    ],
+    "canonical": false
+   },
+   "hex": "3835370a30303a34363a32382c373033202d2d3e2030303a34363a33302c3238380a0a6572656e6f74676f6e6e6120737570706f7274746861740a0a3835380a30303a34363a33302c333030202d2d3e2030303a34363a33312c3030300a6e6578740a0a"
+  },
+  {
+   "id": "SRT17",
+   "file": "fixtures/srt/lenient-non-sequential-index.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 122,
+   "sha256": "4c5cce6fb44c6b1bfb3a14f351205c8fb750e0c39a30e3e0073732e7090c9c8a",
+   "expect": {
+    "cues": 3,
+    "indices": [
+     5,
+     3,
+     3
+    ],
+    "warnings": [
+     "NonSequentialIndex"
+    ],
+    "canonical": true
+   },
+   "hex": "350a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a666976650a0a330a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300a74687265650a0a330a30303a30303a30332c303030202d2d3e2030303a30303a30342c3030300a746872656520616761696e0a0a"
+  },
+  {
+   "id": "SRT18",
+   "file": "fixtures/srt/lenient-whitespace-padded.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 123,
+   "sha256": "0c3ea161e8d8bafb08df6ec273e3a35b9bfffdda0fba1f5b458c430767ca9799",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     "Text with trailing space "
+    ],
+    "last": [
+     2000,
+     3000,
+     "No spaces around arrow"
+    ],
+    "indices": [
+     1,
+     2
+    ],
+    "warnings": [],
+    "canonical": false
+   },
+   "hex": "20203120200a0930303a30303a30312c30303020202d2d3e0930303a30303a30322c3030302020200a54657874207769746820747261696c696e67207370616365200a0a20320a30303a30303a30322c3030302d2d3e30303a30303a30332c3030300a4e6f207370616365732061726f756e64206172726f770a0a"
+  },
+  {
+   "id": "SRT19",
+   "file": "fixtures/srt/lenient-double-blank.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 73,
+   "sha256": "c0c7c34d6c1278ee9da9ca59bc302074b44fb6981180e61178fd632cf2a70779",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     "A"
+    ],
+    "last": [
+     2000,
+     3000,
+     "B"
+    ],
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "SRT with single blank separators"
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a410a0a0a0a320a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300a420a0a0a"
+  },
+  {
+   "id": "SRT20",
+   "file": "fixtures/srt/lenient-short-millis.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 77,
+   "sha256": "b1e0c45d1b3738cec60ebef10fd9ba60a7333c43974736a88c1a3557fd869961",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1500,
+     2500,
+     "short millis"
+    ],
+    "last": [
+     3700,
+     4000,
+     "more"
+    ],
+    "warnings": [
+     "ShortMillis"
+    ],
+    "canonical": false
+   },
+   "hex": "310a30303a30303a30312c35202d2d3e2030303a30303a30322c35300a73686f7274206d696c6c69730a0a320a30303a30303a30332c37202d2d3e2030303a30303a30342c300a6d6f72650a0a"
+  },
+  {
+   "id": "SRT21",
+   "file": "fixtures/srt/lenient-no-hours.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 74,
+   "sha256": "3773277d6cddf4fbd7e1787bc59e99ad28d04be48448c284fc4dda67d8848af2",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     "no hours"
+    ],
+    "last": [
+     62500,
+     63000,
+     "minute one"
+    ],
+    "warnings": [
+     "MissingHours"
+    ],
+    "canonical": false
+   },
+   "hex": "310a30303a30312c303030202d2d3e2030303a30322c3030300a6e6f20686f7572730a0a320a30313a30322c353030202d2d3e2030313a30332c3030300a6d696e757465206f6e650a0a"
+  },
+  {
+   "id": "SRT22",
+   "file": "fixtures/srt/lenient-missing-blank-line.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 78,
+   "sha256": "d492b25287dedaab714f9d32d4ae4f52e51d15bd74976cedefc4cce0542c3c61",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     "first"
+    ],
+    "last": [
+     2000,
+     3000,
+     "second"
+    ],
+    "indices": [
+     1,
+     2
+    ],
+    "warnings": [
+     "MissingBlankLine"
+    ],
+    "canonical": false
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a66697273740a320a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300a7365636f6e640a0a"
+  },
+  {
+   "id": "SRT23",
+   "file": "fixtures/srt/lenient-end-before-start.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 43,
+   "sha256": "0fc61cf12a1fca7007508b8e51e3ed877b891422f21c7d1306bade8e78cdb189",
+   "expect": {
+    "cues": 1,
+    "first": [
+     5000,
+     2000,
+     "backwards"
+    ],
+    "warnings": [
+     "EndBeforeStart"
+    ],
+    "canonical": true
+   },
+   "hex": "310a30303a30303a30352c303030202d2d3e2030303a30303a30322c3030300a6261636b77617264730a0a"
+  },
+  {
+   "id": "SRT24",
+   "file": "fixtures/srt/lenient-minutes-over-59.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 54,
+   "sha256": "2343b749c36df430050ee27c08d3a80dbda21a44a881aaf84468fda2b8dd047b",
+   "expect": {
+    "cues": 1,
+    "first": [
+     4500000,
+     4501000,
+     "seventy five minutes"
+    ],
+    "warnings": [
+     "ComponentOutOfRange"
+    ],
+    "canonical": false,
+    "canonical_form": "01:15:00,000 --> 01:15:01,000"
+   },
+   "hex": "310a30303a37353a30302c303030202d2d3e2030303a37353a30312c3030300a736576656e74792066697665206d696e757465730a0a"
+  },
+  {
+   "id": "SRT25",
+   "file": "fixtures/srt/lenient-trailing-suffix.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 52,
+   "sha256": "1c1f8d07828036d468dd538821495eea8a91f49f1b904f794958d66f24e24259",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "suffix kept"
+    ],
+    "settings": [
+     "line:0"
+    ],
+    "warnings": [
+     "UnknownTimingSuffix"
+    ],
+    "canonical": true
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30322c303030206c696e653a300a737566666978206b6570740a0a"
+  },
+  {
+   "id": "SRT26",
+   "file": "fixtures/srt/lenient-only-text-no-cues.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 50,
+   "sha256": "27819adde2a6e55d187b6bda3920b10a8e0f5ab0c31784a285a17bcee5f662e1",
+   "expect": {
+    "cues": 0,
+    "warnings": [
+     "NoCues"
+    ],
+    "canonical": false
+   },
+   "hex": "54686973206973206a757374206120746578742066696c652e0a497420686173206e6f2074696d696e67206c696e65732e0a"
+  },
+  {
+   "id": "SRT27",
+   "file": "fixtures/srt/lenient-empty.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "expect": {
+    "cues": 0,
+    "warnings": [
+     "NoCues"
+    ],
+    "canonical": false
+   },
+   "hex": ""
+  },
+  {
+   "id": "SRT28",
+   "file": "fixtures/srt/lenient-index-with-text.srt",
+   "format": "srt",
+   "kind": "tolerated",
+   "len": 85,
+   "sha256": "76622ec388bfde6c1d3642985ffc8182173556840095ee35031e42419eb0d69e",
+   "expect": {
+    "cues": 2,
+    "indices": [
+     1,
+     null
+    ],
+    "last": [
+     2000,
+     3000,
+     "second"
+    ],
+    "warnings": [
+     "MissingIndex",
+     "StrayText"
+    ],
+    "canonical": false
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a66697273740a0a322065787472610a30303a30303a30322c303030202d2d3e2030303a30303a30332c3030300a7365636f6e640a0a"
+  },
+  {
+   "id": "SRT40",
+   "file": "fixtures/srt/bad-huge-hours-digits.srt",
+   "format": "srt",
+   "kind": "error",
+   "len": 78,
+   "sha256": "17b2a3063b5c5ceaef91fd3b59629fd75cfb26d49ac687a92dd883129e58f856",
+   "expect": {
+    "error": "TimeOutOfRange",
+    "line": 2
+   },
+   "hex": "310a39393939393939393939393939393939393939393a30303a30302c303030202d2d3e2039393939393939393939393939393939393939393a30303a30312c3030300a6f766572666c6f770a0a"
+  },
+  {
+   "id": "SRT41",
+   "file": "fixtures/srt/bad-i64-overflow-hours.srt",
+   "format": "srt",
+   "kind": "error",
+   "len": 76,
+   "sha256": "f1361f989d2f5b813615bd9120e10dd987845a682355b427f3fd22ab73a93196",
+   "expect": {
+    "error": "TimeOutOfRange",
+    "line": 2
+   },
+   "hex": "310a393232333337323033363835343737353830373a30303a30302c303030202d2d3e20393232333337323033363835343737353830373a30303a30312c3030300a6f766572666c6f770a0a"
+  },
+  {
+   "id": "SRT42",
+   "file": "fixtures/srt/bad-negative-time.srt",
+   "format": "srt",
+   "kind": "error",
+   "len": 43,
+   "sha256": "272ba61490e93603e4c3d65a76116fda4ca468496327a7114237a95c60240d2c",
+   "expect": {
+    "error": "NegativeTime",
+    "line": 2
+   },
+   "hex": "310a2d30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a6e656761746976650a0a"
+  },
+  {
+   "id": "SRT43",
+   "file": "fixtures/srt/bad-letters-in-time.srt",
+   "format": "srt",
+   "kind": "error",
+   "len": 37,
+   "sha256": "b8ff6cff06fc4c80c3614fb3c0cc19bb3ef35252d29ba3cae7796d5b03b76478",
+   "expect": {
+    "error": "InvalidTimestamp",
+    "line": 2
+   },
+   "hex": "310a30303a30303a30612c303030202d2d3e2030303a30303a30322c3030300a6261640a0a"
+  },
+  {
+   "id": "SRT44",
+   "file": "fixtures/srt/bad-no-arrow.srt",
+   "format": "srt",
+   "kind": "error",
+   "len": 44,
+   "sha256": "73687944f9a9d83e5a06c7a18f0096b90b1d5b25a996832793e44f0035111a7c",
+   "expect": {
+    "error": "MissingArrow",
+    "line": 2
+   },
+   "hex": "310a30303a30303a30312c303030202d3e2030303a30303a30322c3030300a73696e676c6520646173680a0a"
+  },
+  {
+   "id": "SRT45",
+   "file": "fixtures/srt/bad-invalid-utf8.srt",
+   "format": "srt",
+   "kind": "error",
+   "len": 44,
+   "sha256": "42b6ee367b97754eb0d865dcffdf682059db064c7ca1f1382cf2f0e4b2361e5a",
+   "expect": {
+    "error": "InvalidUtf8",
+    "offset": 35
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a62616420ff20627974650a0a"
+  },
+  {
+   "id": "SRT46",
+   "file": "fixtures/srt/bad-utf16-bom.srt",
+   "format": "srt",
+   "kind": "error",
+   "len": 344,
+   "sha256": "2826844ac0be250169edf325397a54d1d552ff73702c704eb871b89fe9c1a1e7",
+   "expect": {
+    "error": "Utf16Input"
+   },
+   "hex": "fffe31000a00300030003a00300030003a00300031002c0030003000300020002d002d003e002000300030003a00300030003a00300034002c003000300030000a00480065006c006c006f002c00200077006f0072006c0064002e000a000a0032000a00300030003a00300030003a00300034002c0035003000300020002d002d003e002000300030003a00300030003a00300036002c003200350030000a005300650063006f006e00640020006300750065000a0077006900740068002000740077006f0020006c0069006e00650073002e000a000a0033000a00300030003a00300031003a00300030002c0030003000300020002d002d003e002000300030003a00300031003a00300032002c003000300030000a003c0069003e004900740061006c00690063003c002f0069003e00200061006e00640020003c0062003e0062006f006c0064003c002f0062003e002e000a000a00"
+  },
+  {
+   "id": "SRT47",
+   "file": "fixtures/srt/bad-truncated-timing.srt",
+   "format": "srt",
+   "kind": "error",
+   "len": 26,
+   "sha256": "21124c92c685b663441c50d0b380686242974008388f82b1b210c06c4fdb2c92",
+   "expect": {
+    "error": "InvalidTimestamp",
+    "line": 2
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e200a746578740a0a"
+  },
+  {
+   "id": "VTT01",
+   "file": "fixtures/vtt/canonical-basic.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 185,
+   "sha256": "b2d3e0025975f95d7aabbb2b5318024119c41994be8ea353f296ce9c45256261",
+   "expect": {
+    "cues": 3,
+    "ids": [
+     "1",
+     "2",
+     "intro-3"
+    ],
+    "first": [
+     1000,
+     4000,
+     "Hello, world."
+    ],
+    "last": [
+     60000,
+     62000,
+     "<i>Italic</i> and <b>bold</b>."
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a0a310a30303a30303a30312e303030202d2d3e2030303a30303a30342e3030300a48656c6c6f2c20776f726c642e0a0a320a30303a30303a30342e353030202d2d3e2030303a30303a30362e3235300a5365636f6e64206375650a776974682074776f206c696e65732e0a0a696e74726f2d330a30303a30313a30302e303030202d2d3e2030303a30313a30322e3030300a3c693e4974616c69633c2f693e20616e64203c623e626f6c643c2f623e2e0a0a"
+  },
+  {
+   "id": "VTT02",
+   "file": "fixtures/vtt/canonical-signature-text.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 67,
+   "sha256": "01341be2c5ca56ef9be3d772849a4b71a92abdf0deeb3b1c5affd4cbdf7b1958",
+   "expect": {
+    "cues": 1,
+    "ids": [
+     null
+    ],
+    "signature": "- This file has cues.",
+    "first": [
+     1000,
+     2000,
+     "no id"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "574542565454202d20546869732066696c652068617320637565732e0a0a30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300a6e6f2069640a0a"
+  },
+  {
+   "id": "VTT03",
+   "file": "fixtures/vtt/canonical-style-region-note.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 367,
+   "sha256": "2b769f48d480e13e29a5ad59a09e2650be90776b27bbaf25e582a0e050439f0e",
+   "expect": {
+    "cues": 2,
+    "blocks": [
+     "STYLE",
+     "REGION",
+     "NOTE",
+     "NOTE"
+    ],
+    "settings": [
+     "region:fred",
+     null
+    ],
+    "first": [
+     1000,
+     2000,
+     "In the region"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a0a5354594c450a3a3a637565207b0a20206261636b67726f756e642d696d6167653a206c696e6561722d6772616469656e7428746f20626f74746f6d2c2064696d677261792c206c6967687467726179293b0a2020636f6c6f723a20706170617961776869703b0a7d0a0a524547494f4e0a69643a667265640a77696474683a3430250a6c696e65733a330a726567696f6e616e63686f723a30252c313030250a76696577706f7274616e63686f723a3130252c3930250a7363726f6c6c3a75700a0a4e4f54452054686973206973206120636f6d6d656e740a7370616e6e696e672074776f206c696e65730a0a30303a30303a30312e303030202d2d3e2030303a30303a30322e30303020726567696f6e3a667265640a496e2074686520726567696f6e0a0a4e4f5445206265747765656e20637565730a0a30303a30303a30322e303030202d2d3e2030303a30303a30332e3030300a416674657220746865206e6f74650a0a"
+  },
+  {
+   "id": "VTT04",
+   "file": "fixtures/vtt/canonical-settings.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 213,
+   "sha256": "056fba822645fba00ec88c0491cb4476ca01ddbdbb802befdb89f377224d2451",
+   "expect": {
+    "cues": 3,
+    "settings": [
+     "align:start line:0% position:10% size:50%",
+     "vertical:rl",
+     "line:-1 align:end"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a0a30303a30303a30312e303030202d2d3e2030303a30303a30322e30303020616c69676e3a7374617274206c696e653a302520706f736974696f6e3a3130252073697a653a3530250a616c6c207468652073657474696e67730a0a30303a30303a30322e303030202d2d3e2030303a30303a30332e30303020766572746963616c3a726c0a766572746963616c0a0a30303a30303a30332e303030202d2d3e2030303a30303a30342e303030206c696e653a2d3120616c69676e3a656e640a6e65676174697665206c696e650a0a"
+  },
+  {
+   "id": "VTT05",
+   "file": "fixtures/vtt/canonical-tags-escapes.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 395,
+   "sha256": "15c243869089e2d0c1d209df4d786e7ab1154b54d0bf8997574a02b9613d3717",
+   "expect": {
+    "cues": 5,
+    "first": [
+     1000,
+     2000,
+     "<v Roger Bingham>We are in New York City"
+    ],
+    "last": [
+     6000,
+     7000,
+     "Tom &amp; Jerry &lt;3 &gt; &nbsp;x&lrm;&rlm;"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a0a30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300a3c7620526f6765722042696e6768616d3e57652061726520696e204e657720596f726b20436974790a0a30303a30303a30322e303030202d2d3e2030303a30303a30332e3030300a3c632e79656c6c6f772e62675f626c75653e636c61737365643c2f633e203c623e623c2f623e203c693e693c2f693e203c753e753c2f753e0a0a30303a30303a30332e303030202d2d3e2030303a30303a30342e3030300a3c727562793ee6bca23c72743e6b616e3c2f72743e3c2f727562793e203c6c616e6720656e3e656e676c6973683c2f6c616e673e0a0a30303a30303a30342e303030202d2d3e2030303a30303a30362e3030300a4b6172616f6b65203c30303a30303a30352e3030303e74696d657374616d70207461670a0a30303a30303a30362e303030202d2d3e2030303a30303a30372e3030300a546f6d2026616d703b204a6572727920266c743b33202667743b20266e6273703b78266c726d3b26726c6d3b0a0a"
+  },
+  {
+   "id": "VTT06",
+   "file": "fixtures/vtt/canonical-hours-large.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 55,
+   "sha256": "eaf49e8b433d07ad0d7bd75a7514f426f78a93e8348dfbfe931b8f7d39302289",
+   "expect": {
+    "cues": 1,
+    "first": [
+     360000000,
+     360001000,
+     "hundred hours"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a0a3130303a30303a30302e303030202d2d3e203130303a30303a30312e3030300a68756e6472656420686f7572730a0a"
+  },
+  {
+   "id": "VTT07",
+   "file": "fixtures/vtt/canonical-cjk-emoji.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 109,
+   "sha256": "15b1235afd05c68b0c9a2f3e2944e28ad0142e0f4142e3b7911a6202a194fbe0",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     "日本語の字幕 🎬"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a0a30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300ae697a5e69cace8aa9ee381aee5ad97e5b99520f09f8eac0a0a30303a30303a30322e303030202d2d3e2030303a30303a30332e3030300aed959ceab5adec96b420f09f8dbf0a0a"
+  },
+  {
+   "id": "VTT08",
+   "file": "fixtures/vtt/canonical-overlap.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 82,
+   "sha256": "e5320fe2723326189063787cca8c8a0a1e9dafe3a9b0bfde2231bb78afd12a3b",
+   "expect": {
+    "cues": 2,
+    "order": [
+     1000,
+     2000
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a0a30303a30303a30312e303030202d2d3e2030303a30303a30352e3030300a6c6f6e670a0a30303a30303a30322e303030202d2d3e2030303a30303a30332e3030300a696e736964650a0a"
+  },
+  {
+   "id": "VTT09",
+   "file": "fixtures/vtt/realworld-youtube.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 385,
+   "sha256": "06d6805f64ee490a58e9befc25e8e732411b42ece745f40f1e14f48f3752f769",
+   "expect": {
+    "cues": 3,
+    "header_lines": [
+     "Kind: captions",
+     "Language: en"
+    ],
+    "first": [
+     0,
+     2120,
+     "so<00:00:00.480><c> today</c><00:00:00.799><c> we're</c><00:00:01.000><c> going</c>"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a4b696e643a2063617074696f6e730a4c616e67756167653a20656e0a0a30303a30303a30302e303030202d2d3e2030303a30303a30322e31323020616c69676e3a737461727420706f736974696f6e3a30250a736f3c30303a30303a30302e3438303e3c633e20746f6461793c2f633e3c30303a30303a30302e3739393e3c633e2077652772653c2f633e3c30303a30303a30312e3030303e3c633e20676f696e673c2f633e0a0a30303a30303a30322e313230202d2d3e2030303a30303a30322e31333020616c69676e3a737461727420706f736974696f6e3a30250a736f20746f64617920776527726520676f696e670a200a0a30303a30303a30322e313330202d2d3e2030303a30303a30342e30373020616c69676e3a737461727420706f736974696f6e3a30250a736f20746f64617920776527726520676f696e670a746f3c30303a30303a30322e3339393e3c633e2074616c6b3c2f633e3c30303a30303a30322e3633393e3c633e2061626f75743c2f633e0a0a"
+  },
+  {
+   "id": "VTT10",
+   "file": "fixtures/vtt/canonical-empty-cue.vtt",
+   "format": "vtt",
+   "kind": "valid",
+   "len": 75,
+   "sha256": "b358dd874f8fcd89e4b2848ae7d3c9a400f6200bd196e3bb8db462ab489c491f",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     ""
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a0a30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300a0a30303a30303a30322e303030202d2d3e2030303a30303a30332e3030300a6e6578740a0a"
+  },
+  {
+   "id": "VTT20",
+   "file": "fixtures/vtt/lenient-bom-crlf.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 203,
+   "sha256": "36d3a1987ee71383951caf76daa8e739a073b16c973cea9a397a9e3cd93fd29e",
+   "expect": {
+    "cues": 3,
+    "first": [
+     1000,
+     4000,
+     "Hello, world."
+    ],
+    "warnings": [
+     "BomStripped"
+    ],
+    "canonical": false,
+    "canonical_form": "VTT01 bytes"
+   },
+   "hex": "efbbbf5745425654540d0a0d0a310d0a30303a30303a30312e303030202d2d3e2030303a30303a30342e3030300d0a48656c6c6f2c20776f726c642e0d0a0d0a320d0a30303a30303a30342e353030202d2d3e2030303a30303a30362e3235300d0a5365636f6e64206375650d0a776974682074776f206c696e65732e0d0a0d0a696e74726f2d330d0a30303a30313a30302e303030202d2d3e2030303a30313a30322e3030300d0a3c693e4974616c69633c2f693e20616e64203c623e626f6c643c2f623e2e0d0a0d0a"
+  },
+  {
+   "id": "VTT21",
+   "file": "fixtures/vtt/lenient-no-trailing-newline.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 183,
+   "sha256": "75a73265f190fbe1728d9d84200aeadc354efa3063696a29fdca30ccbdd2566a",
+   "expect": {
+    "cues": 3,
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "VTT01 bytes"
+   },
+   "hex": "5745425654540a0a310a30303a30303a30312e303030202d2d3e2030303a30303a30342e3030300a48656c6c6f2c20776f726c642e0a0a320a30303a30303a30342e353030202d2d3e2030303a30303a30362e3235300a5365636f6e64206375650a776974682074776f206c696e65732e0a0a696e74726f2d330a30303a30313a30302e303030202d2d3e2030303a30313a30322e3030300a3c693e4974616c69633c2f693e20616e64203c623e626f6c643c2f623e2e"
+  },
+  {
+   "id": "VTT22",
+   "file": "fixtures/vtt/lenient-comma-millis.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 55,
+   "sha256": "bd78db7a3c11deafab78b3327e60e2a402c7705db5c472d11d9750dd0a7e2964",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "srt style comma"
+    ],
+    "warnings": [
+     "CommaMillis"
+    ],
+    "canonical": false
+   },
+   "hex": "5745425654540a0a30303a30303a30312c303030202d2d3e2030303a30303a30322c3030300a737274207374796c6520636f6d6d610a0a"
+  },
+  {
+   "id": "VTT23",
+   "file": "fixtures/vtt/lenient-no-hours.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 44,
+   "sha256": "719cdd1367461823e333e2c240ad25dc294ce985970cbade2ab08ca5538c5c7b",
+   "expect": {
+    "cues": 1,
+    "first": [
+     62000,
+     63500,
+     "minute one"
+    ],
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "00:01:02.000 --> 00:01:03.500"
+   },
+   "hex": "5745425654540a0a30313a30322e303030202d2d3e2030313a30332e3530300a6d696e757465206f6e650a0a"
+  },
+  {
+   "id": "VTT24",
+   "file": "fixtures/vtt/lenient-single-digit-hours.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 49,
+   "sha256": "0a1d913dcf81103145d2384257b05f9b671557d509c4fdf0dc98510b7051083e",
+   "expect": {
+    "cues": 1,
+    "first": [
+     3600000,
+     3601000,
+     "short hours"
+    ],
+    "warnings": [
+     "ShortHours"
+    ],
+    "canonical": false
+   },
+   "hex": "5745425654540a0a313a30303a30302e303030202d2d3e20313a30303a30312e3030300a73686f727420686f7572730a0a"
+  },
+  {
+   "id": "VTT25",
+   "file": "fixtures/vtt/lenient-missing-blank-after-header.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 57,
+   "sha256": "76e4053dcd644cc0301deeeb22afa77b8388d421323517c4629e43fef083f430",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "right after header"
+    ],
+    "warnings": [
+     "MissingBlankLine"
+    ],
+    "canonical": false
+   },
+   "hex": "5745425654540a30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300a7269676874206166746572206865616465720a0a"
+  },
+  {
+   "id": "VTT26",
+   "file": "fixtures/vtt/lenient-x-timestamp-map.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 100,
+   "sha256": "a29ab51e99da28952253662bcda4c474ed8b07bbe33ff36567ddd74eb385b16b",
+   "expect": {
+    "cues": 1,
+    "header_lines": [
+     "X-TIMESTAMP-MAP=MPEGTS:900000,LOCAL:00:00:00.000"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5745425654540a582d54494d455354414d502d4d41503d4d50454754533a3930303030302c4c4f43414c3a30303a30303a30302e3030300a0a30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300a686c73207365676d656e740a0a"
+  },
+  {
+   "id": "VTT27",
+   "file": "fixtures/vtt/lenient-tabs-around-arrow.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 51,
+   "sha256": "0debaa6422893223cfc747cb6219ac03c7dd2427ff72f6d460ee8be3a5fdd5e9",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "tabs"
+    ],
+    "settings": [
+     "line:0"
+    ],
+    "warnings": [],
+    "canonical": false
+   },
+   "hex": "5745425654540a0a30303a30303a30312e303030092d2d3e0930303a30303a30322e303030096c696e653a300a746162730a0a"
+  },
+  {
+   "id": "VTT28",
+   "file": "fixtures/vtt/lenient-cr-only.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 185,
+   "sha256": "05e983701309087153ddbc7605c5668f1f5d775e8307d359bbf23b5ddf698624",
+   "expect": {
+    "cues": 3,
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "VTT01 bytes"
+   },
+   "hex": "5745425654540d0d310d30303a30303a30312e303030202d2d3e2030303a30303a30342e3030300d48656c6c6f2c20776f726c642e0d0d320d30303a30303a30342e353030202d2d3e2030303a30303a30362e3235300d5365636f6e64206375650d776974682074776f206c696e65732e0d0d696e74726f2d330d30303a30313a30302e303030202d2d3e2030303a30313a30322e3030300d3c693e4974616c69633c2f693e20616e64203c623e626f6c643c2f623e2e0d0d"
+  },
+  {
+   "id": "VTT29",
+   "file": "fixtures/vtt/lenient-over-59-minutes.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 52,
+   "sha256": "fce19b126338bded83a5f2e0ba72f9936398426e708069b3439803abb02f6424",
+   "expect": {
+    "cues": 1,
+    "first": [
+     4500000,
+     4501000,
+     "seventy five"
+    ],
+    "warnings": [
+     "ComponentOutOfRange"
+    ],
+    "canonical": false
+   },
+   "hex": "5745425654540a0a30303a37353a30302e303030202d2d3e2030303a37353a30312e3030300a736576656e747920666976650a0a"
+  },
+  {
+   "id": "VTT30",
+   "file": "fixtures/vtt/lenient-header-only.vtt",
+   "format": "vtt",
+   "kind": "tolerated",
+   "len": 7,
+   "sha256": "73420fdc06730575e08b8a09b5b3824e0f2a9d2dd742640613490ef3abac2bd0",
+   "expect": {
+    "cues": 0,
+    "warnings": [
+     "NoCues"
+    ],
+    "canonical": false,
+    "canonical_form": "WEBVTT\n\n"
+   },
+   "hex": "5745425654540a"
+  },
+  {
+   "id": "VTT40",
+   "file": "fixtures/vtt/bad-no-header.vtt",
+   "format": "vtt",
+   "kind": "error",
+   "len": 44,
+   "sha256": "187746698aa6a16b19638cc681eecc52d468220dcaa6470637cc215aa5e79427",
+   "expect": {
+    "error": "MissingHeader",
+    "line": 1
+   },
+   "hex": "30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300a6e6f207369676e61747572650a0a"
+  },
+  {
+   "id": "VTT41",
+   "file": "fixtures/vtt/bad-header-glued.vtt",
+   "format": "vtt",
+   "kind": "error",
+   "len": 46,
+   "sha256": "ce1b5221191b307900c409c40ea1c715ada7b2b517ac0741349e29db529c492e",
+   "expect": {
+    "error": "MissingHeader",
+    "line": 1
+   },
+   "hex": "574542565454580a0a30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300a676c7565640a0a"
+  },
+  {
+   "id": "VTT42",
+   "file": "fixtures/vtt/bad-timing.vtt",
+   "format": "vtt",
+   "kind": "error",
+   "len": 43,
+   "sha256": "75a569c54be030b8ee2f6c3699a5a4c5c1db529dbe6b449cbe8bd3c852a5e78e",
+   "expect": {
+    "error": "InvalidTimestamp",
+    "line": 3
+   },
+   "hex": "5745425654540a0a30303a30303a30782e303030202d2d3e2030303a30303a30322e3030300a6261640a0a"
+  },
+  {
+   "id": "VTT43",
+   "file": "fixtures/vtt/bad-invalid-utf8.vtt",
+   "format": "vtt",
+   "kind": "error",
+   "len": 45,
+   "sha256": "ee23f99d393b8e7c3e29c979b0038c2872da3c549de9966d302eae4a2a49226b",
+   "expect": {
+    "error": "InvalidUtf8",
+    "offset": 42
+   },
+   "hex": "5745425654540a0a30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300a62616420ff0a0a"
+  },
+  {
+   "id": "VTT44",
+   "file": "fixtures/vtt/bad-empty.vtt",
+   "format": "vtt",
+   "kind": "error",
+   "len": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "expect": {
+    "error": "MissingHeader",
+    "line": 1
+   },
+   "hex": ""
+  },
+  {
+   "id": "VTT45",
+   "file": "fixtures/vtt/bad-negative-time.vtt",
+   "format": "vtt",
+   "kind": "error",
+   "len": 44,
+   "sha256": "d1ddb25d4060dda846c196ca491f885bd48583fc70ac1181be54fecefff7d140",
+   "expect": {
+    "error": "NegativeTime",
+    "line": 3
+   },
+   "hex": "5745425654540a0a2d30303a30303a30312e303030202d2d3e2030303a30303a30322e3030300a6e65670a0a"
+  },
+  {
+   "id": "VTT46",
+   "file": "fixtures/vtt/bad-huge-hours-digits.vtt",
+   "format": "vtt",
+   "kind": "error",
+   "len": 77,
+   "sha256": "2d68d1eea1435a393966be09525d1c4185728eded7ac765318963ca9d3608822",
+   "expect": {
+    "error": "TimeOutOfRange",
+    "line": 3
+   },
+   "hex": "5745425654540a0a39393939393939393939393939393939393939393a30303a30302e303030202d2d3e2039393939393939393939393939393939393939393a30303a30312e3030300a780a0a"
+  },
+  {
+   "id": "ASS01",
+   "file": "fixtures/ass/canonical-basic.ass",
+   "format": "ass",
+   "kind": "valid",
+   "len": 949,
+   "sha256": "fd6e8123ddb9fd2ce7369e378a687e29735c968e3e236243671d0d5292624db1",
+   "expect": {
+    "cues": 3,
+    "styles": [
+     "Default",
+     "Top"
+    ],
+    "first": [
+     1000,
+     4000,
+     "Hello, world."
+    ],
+    "last": [
+     60000,
+     62000,
+     "{\\i1}Italic{\\i0} and {\\b1}bold{\\b0}."
+    ],
+    "ass_fields": [
+     {
+      "layer": 0,
+      "style": "Default",
+      "name": ""
+     },
+     {
+      "layer": 0,
+      "style": "Default",
+      "name": "Narrator"
+     },
+     {
+      "layer": 1,
+      "style": "Top",
+      "name": ""
+     }
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30342e30302c44656661756c742c2c302c302c302c2c48656c6c6f2c20776f726c642e0a4469616c6f6775653a20302c303a30303a30342e35302c303a30303a30362e32352c44656661756c742c4e61727261746f722c302c302c302c2c5365636f6e64206375655c4e776974682074776f206c696e65732e0a4469616c6f6775653a20312c303a30313a30302e30302c303a30313a30322e30302c546f702c2c302c302c302c2c7b5c69317d4974616c69637b5c69307d20616e64207b5c62317d626f6c647b5c62307d2e0a"
+  },
+  {
+   "id": "ASS02",
+   "file": "fixtures/ass/canonical-override-tags.ass",
+   "format": "ass",
+   "kind": "valid",
+   "len": 1218,
+   "sha256": "9cdaca7f56e1039c608c1f9b440cdbb6796bc3b71a12438a947df5d971fa37c5",
+   "expect": {
+    "cues": 5,
+    "first": [
+     1000,
+     2000,
+     "{\\an8\\pos(640,50)}Top {\\fad(150,150)\\blur0.5\\bord1}faded"
+    ],
+    "last": [
+     5000,
+     6000,
+     "{\\u1\\s1}under strike{\\u0\\s0} {\\fs30\\fnComic Sans MS}size font"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c7b5c616e385c706f73283634302c3530297d546f70207b5c666164283135302c313530295c626c7572302e355c626f7264317d66616465640a4469616c6f6775653a20302c303a30303a30322e30302c303a30303a30332e30302c44656661756c742c2c302c302c302c2c7b5c632648303030304646267d7265647b5c637d207468656e207b5c31632648464630303030267d626c75657b5c727d0a4469616c6f6775653a20302c303a30303a30332e30302c303a30303a30342e30302c44656661756c742c2c302c302c302c2c686172645c68737061636520616e645c6e736f667420627265616b20616e64207b74686973206973206120636f6d6d656e747d0a4469616c6f6775653a20302c303a30303a30342e30302c303a30303a30352e30302c44656661756c742c2c302c302c302c2c7b5c6b32307d6b617b5c6b33307d72617b5c6b32357d6f7b5c6b34307d6b650a4469616c6f6775653a20302c303a30303a30352e30302c303a30303a30362e30302c44656661756c742c2c302c302c302c2c7b5c75315c73317d756e64657220737472696b657b5c75305c73307d207b5c667333305c666e436f6d69632053616e73204d537d73697a6520666f6e740a"
+  },
+  {
+   "id": "ASS03",
+   "file": "fixtures/ass/canonical-comment-and-other-events.ass",
+   "format": "ass",
+   "kind": "valid",
+   "len": 966,
+   "sha256": "78728595cdf938702a31a82827af8adf1b0af5af560e05324c6704eb2a95a254",
+   "expect": {
+    "cues": 2,
+    "events": [
+     "Comment",
+     "Sound"
+    ],
+    "first": [
+     1000,
+     2000,
+     "Visible"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a436f6d6d656e743a20302c303a30303a30302e30302c303a30303a30302e30302c44656661756c742c2c302c302c302c2c54686973206973206120636f6d6d656e74206576656e740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c56697369626c650a536f756e643a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c626565702e7761760a4469616c6f6775653a20302c303a30303a30322e30302c303a30303a30332e30302c44656661756c742c2c302c302c302c2c416c736f2076697369626c650a"
+  },
+  {
+   "id": "ASS04",
+   "file": "fixtures/ass/ssa-v4.ssa",
+   "format": "ass",
+   "kind": "valid",
+   "len": 636,
+   "sha256": "79ab8011da25c96886b9f0cc7e1b5ff8c27efe90c2a1b3bbf287591ac7cbdcac",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     "SSA v4 line"
+    ],
+    "ass_fields": [
+     {
+      "marked": false
+     },
+     {
+      "marked": true
+     }
+    ],
+    "warnings": [
+     "UpgradedToV4Plus"
+    ],
+    "canonical": false,
+    "canonical_form": "v4+ file: [V4+ Styles] 23-field Format, decimal colours rewritten as &HAABBGGRR, Layer column, unpadded margins"
+   },
+   "hex": "5b53637269707420496e666f5d0a5469746c653a204f6c64205353410a536372697074547970653a2076342e30300a436f6c6c6973696f6e733a204e6f726d616c0a506c6179526573593a203438300a54696d65723a203130302e303030300a0a5b5634205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c205465727469617279436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20416c7068614c6576656c2c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c32302c31363737373231352c36353533352c36353533352c2d323134373438333634302c2d312c302c312c332c302c322c33302c33302c33302c302c300a0a5b4576656e74735d0a466f726d61743a204d61726b65642c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a204d61726b65643d302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c303030302c303030302c303030302c2c535341207634206c696e650a4469616c6f6775653a204d61726b65643d312c303a30303a30322e30302c303a30303a30332e30302c44656661756c742c2c303030302c303030302c303030302c2c4d61726b6564206c696e650a"
+  },
+  {
+   "id": "ASS05",
+   "file": "fixtures/ass/canonical-extra-sections.ass",
+   "format": "ass",
+   "kind": "valid",
+   "len": 766,
+   "sha256": "96187ad65ef292f3f1508c68532494c546b7cf3021fa701cd3d3d9d853e10fbf",
+   "expect": {
+    "cues": 1,
+    "raw_sections": [
+     "Aegisub Project Garbage",
+     "Fonts"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5b53637269707420496e666f5d0a5469746c653a204578747261730a536372697074547970653a2076342e30302b0a0a5b416567697375622050726f6a65637420476172626167655d0a417564696f2046696c653a20657030312e6d6b760a566964656f2046696c653a20657030312e6d6b760a0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b466f6e74735d0a666f6e746e616d653a20636f6d69632e7474660a4d29244e262525254e262525254e262525250a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c77697468206578747261730a"
+  },
+  {
+   "id": "ASS06",
+   "file": "fixtures/ass/canonical-text-with-commas.ass",
+   "format": "ass",
+   "kind": "valid",
+   "len": 895,
+   "sha256": "b967e9342b6aac50c991fcca13c1bdacc38a977941c1baed9c5bb165f7541c41",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     "One, two, three, {\\pos(1,2)}four"
+    ],
+    "ass_fields": [
+     {
+      "name": ""
+     },
+     {
+      "name": "Name"
+     }
+    ],
+    "warnings": [
+     "BadField"
+    ],
+    "canonical": false
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c4f6e652c2074776f2c2074687265652c207b5c706f7328312c32297d666f75720a4469616c6f6775653a20302c303a30303a30322e30302c303a30303a30332e30302c44656661756c742c4e616d652c207769746820636f6d6d613f2c302c302c302c2c4e616d65206669656c6420656e64732061742074686520636f6d6d610a"
+  },
+  {
+   "id": "ASS07",
+   "file": "fixtures/ass/canonical-over-24h.ass",
+   "format": "ass",
+   "kind": "valid",
+   "len": 840,
+   "sha256": "71018830fa46ba9152025a7fd64bde22b8f2019006bd27677983296d8881c17d",
+   "expect": {
+    "cues": 2,
+    "first": [
+     90000000,
+     90001500,
+     "day two"
+    ],
+    "last": [
+     446399990,
+     446400000,
+     "five days"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c32353a30303a30302e30302c32353a30303a30312e35302c44656661756c742c2c302c302c302c2c6461792074776f0a4469616c6f6775653a20302c3132333a35393a35392e39392c3132343a30303a30302e30302c44656661756c742c2c302c302c302c2c6669766520646179730a"
+  },
+  {
+   "id": "ASS08",
+   "file": "fixtures/ass/canonical-cjk-emoji.ass",
+   "format": "ass",
+   "kind": "valid",
+   "len": 883,
+   "sha256": "1d011329408d469f15dc539cf81098f3e2787b0a82f6e1e843c3a851f1e97440",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     "日本語の字幕 🎬"
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2ce697a5e69cace8aa9ee381aee5ad97e5b99520f09f8eac0a4469616c6f6775653a20302c303a30303a30322e30302c303a30303a30332e30302c44656661756c742c2c302c302c302c2ced959ceab5adec96b420f09f8dbf207b5c666e4e6f746f2053616e7320434a4b204a507de6b7b7e590880a"
+  },
+  {
+   "id": "ASS09",
+   "file": "fixtures/ass/canonical-overlap-layers.ass",
+   "format": "ass",
+   "kind": "valid",
+   "len": 917,
+   "sha256": "c0530344b4e75be45a2840dd4889e20a574c3830282d381183af0a9e50e1cf90",
+   "expect": {
+    "cues": 3,
+    "order": [
+     1000,
+     2000,
+     500
+    ],
+    "warnings": [],
+    "canonical": true
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30352e30302c44656661756c742c2c302c302c302c2c6c6f6e670a4469616c6f6775653a20312c303a30303a30322e30302c303a30303a30332e30302c546f702c2c302c302c302c2c696e73696465206f6e206c6179657220310a4469616c6f6775653a20302c303a30303a30302e35302c303a30303a30312e35302c44656661756c742c2c302c302c302c2c737461727473206561726c69657220627574206c6973746564206c617465720a"
+  },
+  {
+   "id": "ASS10",
+   "file": "fixtures/ass/realworld-aegisub.ass",
+   "format": "ass",
+   "kind": "valid",
+   "len": 1716,
+   "sha256": "8b016d1f4811dcd8e32c8d63e2700dca8457d090230656f8048105ce8bbad077",
+   "expect": {
+    "cues": 6,
+    "events": [
+     "Comment"
+    ],
+    "styles": [
+     "Default",
+     "OP-Romaji",
+     "Sign"
+    ],
+    "first": [
+     2340,
+     5120,
+     "{\\i1}(distant thunder){\\i0}"
+    ],
+    "warnings": [
+     "BomStripped"
+    ],
+    "canonical": false,
+    "canonical_form": "same without BOM and with \\n line endings"
+   },
+   "hex": "efbbbf5b53637269707420496e666f5d0d0a3b205363726970742067656e657261746564206279204165676973756220332e322e320d0a3b20687474703a2f2f7777772e616567697375622e6f72672f0d0a5469746c653a20457069736f64652030310d0a536372697074547970653a2076342e30302b0d0a577261705374796c653a20300d0a5363616c6564426f72646572416e64536861646f773a207965730d0a5943624372204d61747269783a2054562e3730390d0a506c6179526573583a20313932300d0a506c6179526573593a20313038300d0a0d0a5b416567697375622050726f6a65637420476172626167655d0d0a4c617374205374796c652053746f726167653a2044656661756c740d0a417564696f2046696c653a202e2e2f657030312e6d6b760d0a566964656f2046696c653a202e2e2f657030312e6d6b760d0a566964656f204152204d6f64653a20340d0a566964656f2041522056616c75653a20312e3737373737380d0a566964656f205a6f6f6d2050657263656e743a20302e3530303030300d0a416374697665204c696e653a20320d0a0d0a5b56342b205374796c65735d0d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670d0a5374796c653a2044656661756c742c4f70656e2053616e732053656d69626f6c642c37322c264830304646464646462c264830303030303046462c264830303032303731332c264830303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c332e362c302c322c3138302c3138302c36302c310d0a5374796c653a204f502d526f6d616a692c547265627563686574204d532c36302c264830304646464646462c264830303030303046462c264838303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c33302c310d0a5374796c653a205369676e2c417269616c2c35302c264830303030303030302c264830303030303046462c264830304646464646462c264830303030303030302c302c302c302c302c3130302c3130302c302c302c332c302c302c352c302c302c302c310d0a0d0a5b4576656e74735d0d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740d0a4469616c6f6775653a20302c303a30303a30322e33342c303a30303a30352e31322c44656661756c742c2c302c302c302c2c7b5c69317d2864697374616e74207468756e646572297b5c69307d0d0a4469616c6f6775653a20302c303a30303a30352e38382c303a30303a30382e37312c44656661756c742c4d696e612c302c302c302c2c596f75207361696420796f7527642062652068657265206279206e696e652e0d0a4469616c6f6775653a20302c303a30303a30382e37392c303a30303a31312e30342c44656661756c742c4a756e2c302c302c302c2c4920676f742068656c642075702e5c4e427920776861743f0d0a4469616c6f6775653a20312c303a30303a31312e31322c303a30303a31332e39352c5369676e2c2c302c302c302c2c7b5c616e375c706f7328313430302c313230295c66727a2d345c666164283230302c323030297d42524944474520434c4f5345440d0a436f6d6d656e743a20302c303a30303a31342e30332c303a30303a31372e32322c44656661756c742c2c302c302c302c2c544c206e6f74653a2070686f6e652062757a7a696e672073667820686572650d0a4469616c6f6775653a20302c303a30303a31342e30332c303a30303a31372e32322c44656661756c742c2c302c302c302c2c7b5c632648303046464646267d5b70686f6e652062757a7a696e675d7b5c637d0d0a4469616c6f6775653a20302c303a30313a33302e30302c303a30313a33342e34302c4f502d526f6d616a692c2c302c302c302c2c7b5c6b34357d736f7b5c6b33327d7261207b5c6b34307d776f207b5c6b35387d6d697b5c6b33307d74650d0a"
+  },
+  {
+   "id": "ASS20",
+   "file": "fixtures/ass/lenient-bom-crlf.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 972,
+   "sha256": "d808e7bf1980f6c5baa2a6a831619b70ee12c5ffd0e634842e40d9280b281e44",
+   "expect": {
+    "cues": 3,
+    "warnings": [
+     "BomStripped"
+    ],
+    "canonical": false,
+    "canonical_form": "ASS01 bytes"
+   },
+   "hex": "efbbbf5b53637269707420496e666f5d0d0a3b205363726970742067656e6572617465642062792068616e640d0a5469746c653a2042617369630d0a536372697074547970653a2076342e30302b0d0a577261705374796c653a20300d0a506c6179526573583a20313238300d0a506c6179526573593a203732300d0a5363616c6564426f72646572416e64536861646f773a207965730d0a5943624372204d61747269783a2054562e3730390d0a0d0a5b56342b205374796c65735d0d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670d0a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310d0a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310d0a0d0a5b4576656e74735d0d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740d0a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30342e30302c44656661756c742c2c302c302c302c2c48656c6c6f2c20776f726c642e0d0a4469616c6f6775653a20302c303a30303a30342e35302c303a30303a30362e32352c44656661756c742c4e61727261746f722c302c302c302c2c5365636f6e64206375655c4e776974682074776f206c696e65732e0d0a4469616c6f6775653a20312c303a30313a30302e30302c303a30313a30322e30302c546f702c2c302c302c302c2c7b5c69317d4974616c69637b5c69307d20616e64207b5c62317d626f6c647b5c62307d2e0d0a"
+  },
+  {
+   "id": "ASS21",
+   "file": "fixtures/ass/lenient-no-trailing-newline.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 948,
+   "sha256": "9ee000e0cfbd86685aebe48789768cda3d37db75146011039675a266bd6b5c50",
+   "expect": {
+    "cues": 3,
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "ASS01 bytes"
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30342e30302c44656661756c742c2c302c302c302c2c48656c6c6f2c20776f726c642e0a4469616c6f6775653a20302c303a30303a30342e35302c303a30303a30362e32352c44656661756c742c4e61727261746f722c302c302c302c2c5365636f6e64206375655c4e776974682074776f206c696e65732e0a4469616c6f6775653a20312c303a30313a30302e30302c303a30313a30322e30302c546f702c2c302c302c302c2c7b5c69317d4974616c69637b5c69307d20616e64207b5c62317d626f6c647b5c62307d2e"
+  },
+  {
+   "id": "ASS22",
+   "file": "fixtures/ass/lenient-events-only.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 165,
+   "sha256": "aca6dd24792846a0f3549ddaa9d6395ba8a4aa0635b8d2d9696a946702336733",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "no script info, no styles"
+    ],
+    "warnings": [
+     "MissingStyles"
+    ],
+    "canonical": false,
+    "canonical_form": "full header with ScriptType v4.00+ and one Default style"
+   },
+   "hex": "5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c6e6f2073637269707420696e666f2c206e6f207374796c65730a"
+  },
+  {
+   "id": "ASS23",
+   "file": "fixtures/ass/lenient-missing-format-line.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 108,
+   "sha256": "2db32523d65dc6b206123c9b43fdfd464e1a35bad38f561d8790a21828d727cd",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "no format line"
+    ],
+    "warnings": [
+     "MissingFormatLine",
+     "MissingStyles"
+    ],
+    "canonical": false
+   },
+   "hex": "5b53637269707420496e666f5d0a536372697074547970653a2076342e30302b0a0a5b4576656e74735d0a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c6e6f20666f726d6174206c696e650a"
+  },
+  {
+   "id": "ASS24",
+   "file": "fixtures/ass/lenient-millis-in-time.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 857,
+   "sha256": "898a8b2e1973256e6687724edb303aaeb0781bba19f9bf5a2a9f603598d866b8",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1005,
+     2500,
+     "three fraction digits"
+    ],
+    "last": [
+     3500,
+     4000,
+     "one fraction digit"
+    ],
+    "warnings": [
+     "AssFractionDigits"
+    ],
+    "canonical": false,
+    "canonical_form": "0:00:01.00,0:00:02.50 and 0:00:03.50,0:00:04.00 with TimePrecisionLost on cue 1"
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e3030352c303a30303a30322e3530302c44656661756c742c2c302c302c302c2c7468726565206672616374696f6e206469676974730a4469616c6f6775653a20302c303a30303a30332e352c303a30303a30342e302c44656661756c742c2c302c302c302c2c6f6e65206672616374696f6e2064696769740a"
+  },
+  {
+   "id": "ASS25",
+   "file": "fixtures/ass/lenient-two-digit-hours.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 784,
+   "sha256": "0fe00bc4ae1a3ba66801d8f7e3ffb026ddf77de1b360139958b1be18a13e6d7f",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "two digit hours"
+    ],
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "0:00:01.00,0:00:02.00"
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c30303a30303a30312e30302c30303a30303a30322e30302c44656661756c742c2c302c302c302c2c74776f20646967697420686f7572730a"
+  },
+  {
+   "id": "ASS26",
+   "file": "fixtures/ass/lenient-style-missing-fields.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 705,
+   "sha256": "1ebb15451915fac3d81de9f9396397a5e0e301953b97584501e5aa95395fcfec",
+   "expect": {
+    "cues": 1,
+    "styles": [
+     "Default",
+     "Short"
+    ],
+    "warnings": [
+     "FieldCountMismatch"
+    ],
+    "canonical": false
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a2053686f72742c417269616c2c34302c264830304646464630300a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c53686f72742c2c302c302c302c2c73686f7274207374796c650a"
+  },
+  {
+   "id": "ASS27",
+   "file": "fixtures/ass/lenient-dialogue-fewer-fields.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 842,
+   "sha256": "898dd236f5682ec22231afd07b693401d68edda4c0cf29488ae3c6ad28175a0e",
+   "expect": {
+    "cues": 2,
+    "first": [
+     1000,
+     2000,
+     ""
+    ],
+    "last": [
+     2000,
+     3000,
+     ""
+    ],
+    "warnings": [
+     "FieldCountMismatch"
+    ],
+    "canonical": false
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c6f6e6c79206e696e65206669656c647320736f2074686973206973204566666563740a4469616c6f6775653a20302c303a30303a30322e30302c303a30303a30332e30302c44656661756c740a"
+  },
+  {
+   "id": "ASS28",
+   "file": "fixtures/ass/lenient-unknown-style-ref.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 777,
+   "sha256": "c3a0a7a34fa861e032e240575e8a33a2655468a742d3c32f4f0ed7347b5db859",
+   "expect": {
+    "cues": 1,
+    "ass_fields": [
+     {
+      "style": "Nope"
+     }
+    ],
+    "warnings": [
+     "UnknownStyle"
+    ],
+    "canonical": true
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c4e6f70652c2c302c302c302c2c756e6b6e6f776e207374796c650a"
+  },
+  {
+   "id": "ASS29",
+   "file": "fixtures/ass/lenient-lowercase-sections.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 949,
+   "sha256": "d133c0b402c51c09998629ebbe32d47fb14dbe4e5a251eaefe8f83e7176d5152",
+   "expect": {
+    "cues": 3,
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "ASS01 bytes"
+   },
+   "hex": "5b73637269707420696e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b76342b207374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b6576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30342e30302c44656661756c742c2c302c302c302c2c48656c6c6f2c20776f726c642e0a4469616c6f6775653a20302c303a30303a30342e35302c303a30303a30362e32352c44656661756c742c4e61727261746f722c302c302c302c2c5365636f6e64206375655c4e776974682074776f206c696e65732e0a4469616c6f6775653a20312c303a30313a30302e30302c303a30313a30322e30302c546f702c2c302c302c302c2c7b5c69317d4974616c69637b5c69307d20616e64207b5c62317d626f6c647b5c62307d2e0a"
+  },
+  {
+   "id": "ASS30",
+   "file": "fixtures/ass/lenient-no-space-after-colon.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 786,
+   "sha256": "f67326b0be3cbab7aba4075b96249d6003c11adc7509607527ba09df209c232d",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "no space after colon"
+    ],
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "ASS with 'Dialogue: '"
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c6e6f20737061636520616674657220636f6c6f6e0a"
+  },
+  {
+   "id": "ASS31",
+   "file": "fixtures/ass/lenient-no-events.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 627,
+   "sha256": "9e023f877c9dd6a34426e98e6df4641a7015e0d171bc086ff8e79591ba8f0e87",
+   "expect": {
+    "cues": 0,
+    "styles": [
+     "Default",
+     "Top"
+    ],
+    "warnings": [
+     "NoCues"
+    ],
+    "canonical": false
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a"
+  },
+  {
+   "id": "ASS32",
+   "file": "fixtures/ass/lenient-layer-garbage.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 781,
+   "sha256": "bb3e4ae5386b7c877a68e0a6efec87d1a550090b6163db8dc3139b556b744811",
+   "expect": {
+    "cues": 1,
+    "ass_fields": [
+     {
+      "layer": 0,
+      "margin_l": 0
+     }
+    ],
+    "warnings": [
+     "BadField"
+    ],
+    "canonical": false
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a206162632c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c782c792c7a2c2c6761726261676520696e74730a"
+  },
+  {
+   "id": "ASS33",
+   "file": "fixtures/ass/lenient-reordered-format.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 739,
+   "sha256": "c864146ea411f32de8894a783e089373724236807282516eadafd18ce3ab7207",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "reordered, with comma"
+    ],
+    "ass_fields": [
+     {
+      "layer": 2,
+      "style": "Default"
+     }
+    ],
+    "warnings": [
+     "FormatReordered"
+    ],
+    "canonical": false,
+    "canonical_form": "canonical Format order"
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a2053746172742c20456e642c205374796c652c204c617965722c20546578740a4469616c6f6775653a20303a30303a30312e30302c303a30303a30322e30302c44656661756c742c322c72656f7264657265642c207769746820636f6d6d610a"
+  },
+  {
+   "id": "ASS34",
+   "file": "fixtures/ass/lenient-cr-only.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 949,
+   "sha256": "498fc4b3b2f6a8fe0b17cc3e31820e05b91ac7deadf4879ab11e41c547b5e369",
+   "expect": {
+    "cues": 3,
+    "warnings": [],
+    "canonical": false,
+    "canonical_form": "ASS01 bytes"
+   },
+   "hex": "5b53637269707420496e666f5d0d3b205363726970742067656e6572617465642062792068616e640d5469746c653a2042617369630d536372697074547970653a2076342e30302b0d577261705374796c653a20300d506c6179526573583a20313238300d506c6179526573593a203732300d5363616c6564426f72646572416e64536861646f773a207965730d5943624372204d61747269783a2054562e3730390d0d5b56342b205374796c65735d0d466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670d5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310d5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310d0d5b4576656e74735d0d466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740d4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30342e30302c44656661756c742c2c302c302c302c2c48656c6c6f2c20776f726c642e0d4469616c6f6775653a20302c303a30303a30342e35302c303a30303a30362e32352c44656661756c742c4e61727261746f722c302c302c302c2c5365636f6e64206375655c4e776974682074776f206c696e65732e0d4469616c6f6775653a20312c303a30313a30302e30302c303a30313a30322e30302c546f702c2c302c302c302c2c7b5c69317d4974616c69637b5c69307d20616e64207b5c62317d626f6c647b5c62307d2e0d"
+  },
+  {
+   "id": "ASS35",
+   "file": "fixtures/ass/lenient-blank-and-comment-lines-in-events.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 809,
+   "sha256": "657a60117cd3f681f7e90dfdf425e4ae911687b575c88e8bfac37aa5a9be823b",
+   "expect": {
+    "cues": 1,
+    "first": [
+     1000,
+     2000,
+     "after blank and comment"
+    ],
+    "warnings": [],
+    "canonical": false
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a0a3b206120636f6d6d656e74206c696e650a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c616674657220626c616e6b20616e6420636f6d6d656e740a0a"
+  },
+  {
+   "id": "ASS40",
+   "file": "fixtures/ass/bad-timing.ass",
+   "format": "ass",
+   "kind": "error",
+   "len": 776,
+   "sha256": "ad5da952e2dcc550215d51fbc513c929817898770afccdede978ab699641f7c6",
+   "expect": {
+    "error": "InvalidTimestamp",
+    "line": 20
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a78782e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c6261642073746172740a"
+  },
+  {
+   "id": "ASS41",
+   "file": "fixtures/ass/bad-invalid-utf8.ass",
+   "format": "ass",
+   "kind": "error",
+   "len": 772,
+   "sha256": "9df86f56db561dd0251fcdd992dee8132e8488597456e8a901b1a0b624d6a6fd",
+   "expect": {
+    "error": "InvalidUtf8",
+    "offset": 770
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c62616420ff0a"
+  },
+  {
+   "id": "ASS42",
+   "file": "fixtures/ass/bad-empty.ass",
+   "format": "ass",
+   "kind": "tolerated",
+   "len": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "expect": {
+    "cues": 0,
+    "warnings": [
+     "NoCues"
+    ],
+    "canonical": false
+   },
+   "hex": ""
+  },
+  {
+   "id": "ASS43",
+   "file": "fixtures/ass/bad-not-ass-srt-content.ass",
+   "format": "ass",
+   "kind": "error",
+   "len": 171,
+   "sha256": "b3bb30feff8699c4f7aade1cd89a0a1328ac75cef30d960660512fcb94faad22",
+   "expect": {
+    "error": "NotAss",
+    "line": 1
+   },
+   "hex": "310a30303a30303a30312c303030202d2d3e2030303a30303a30342c3030300a48656c6c6f2c20776f726c642e0a0a320a30303a30303a30342c353030202d2d3e2030303a30303a30362c3235300a5365636f6e64206375650a776974682074776f206c696e65732e0a0a330a30303a30313a30302c303030202d2d3e2030303a30313a30322c3030300a3c693e4974616c69633c2f693e20616e64203c623e626f6c643c2f623e2e0a0a"
+  },
+  {
+   "id": "ASS44",
+   "file": "fixtures/ass/bad-huge-hours-digits.ass",
+   "format": "ass",
+   "kind": "error",
+   "len": 794,
+   "sha256": "c6088523f4c4bf03493477ab0f0ac12608fa59187c970f3ed36d4c75101de77b",
+   "expect": {
+    "error": "TimeOutOfRange",
+    "line": 20
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c39393939393939393939393939393939393939393a30303a30302e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c6f766572666c6f770a"
+  },
+  {
+   "id": "ASS45",
+   "file": "fixtures/ass/bad-negative-time.ass",
+   "format": "ass",
+   "kind": "error",
+   "len": 776,
+   "sha256": "1f28bb69f0cf9b67c9b3c195cd0c5d0981cff0eb7d5d750c8d20fd8789da729e",
+   "expect": {
+    "error": "NegativeTime",
+    "line": 20
+   },
+   "hex": "5b53637269707420496e666f5d0a3b205363726970742067656e6572617465642062792068616e640a5469746c653a2042617369630a536372697074547970653a2076342e30302b0a577261705374796c653a20300a506c6179526573583a20313238300a506c6179526573593a203732300a5363616c6564426f72646572416e64536861646f773a207965730a5943624372204d61747269783a2054562e3730390a0a5b56342b205374796c65735d0a466f726d61743a204e616d652c20466f6e746e616d652c20466f6e7473697a652c205072696d617279436f6c6f75722c205365636f6e64617279436f6c6f75722c204f75746c696e65436f6c6f75722c204261636b436f6c6f75722c20426f6c642c204974616c69632c20556e6465726c696e652c20537472696b654f75742c205363616c65582c205363616c65592c2053706163696e672c20416e676c652c20426f726465725374796c652c204f75746c696e652c20536861646f772c20416c69676e6d656e742c204d617267696e4c2c204d617267696e522c204d617267696e562c20456e636f64696e670a5374796c653a2044656661756c742c417269616c2c34382c264830304646464646462c264830303030303046462c264830303030303030302c264830303030303030302c302c302c302c302c3130302c3130302c302c302c312c322c302c322c31302c31302c31302c310a5374796c653a20546f702c417269616c2c34302c264830304646464630302c264830303030303046462c264830303030303030302c264838303030303030302c2d312c302c302c302c3130302c3130302c302c302c312c322c312c382c31302c31302c32302c310a0a5b4576656e74735d0a466f726d61743a204c617965722c2053746172742c20456e642c205374796c652c204e616d652c204d617267696e4c2c204d617267696e522c204d617267696e562c204566666563742c20546578740a4469616c6f6775653a20302c2d303a30303a30312e30302c303a30303a30322e30302c44656661756c742c2c302c302c302c2c6e656761746976650a"
+  },
+  {
+   "id": "PERF01",
+   "file": "fixtures/perf/10k.srt",
+   "format": "srt",
+   "kind": "perf",
+   "len": 846682,
+   "sha256": "bd8e54bd019c131372911bf38a337cca4b1b1b85ff9fba635bf41f5a5f87a133",
+   "expect": {
+    "cues": 10000,
+    "canonical": true
+   }
+  },
+  {
+   "id": "PERF02",
+   "file": "fixtures/perf/10k.vtt",
+   "format": "vtt",
+   "kind": "perf",
+   "len": 966690,
+   "sha256": "10f00b4cea575d24c17299231b064b217b8ebe27672bd29f7f8b5d3e8ee4db90",
+   "expect": {
+    "cues": 10000,
+    "canonical": true
+   }
+  },
+  {
+   "id": "PERF03",
+   "file": "fixtures/perf/10k.ass",
+   "format": "ass",
+   "kind": "perf",
+   "len": 1028504,
+   "sha256": "4d78865d808971d002cf61d63c87261251c938e30c6d14c9759df61fbfd9155a",
+   "expect": {
+    "cues": 10000,
+    "canonical": true
+   }
+  }
+ ]
+}
