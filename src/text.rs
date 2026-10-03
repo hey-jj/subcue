@@ -7,6 +7,11 @@
 
 use crate::model::Format;
 
+/// Maximum span nesting depth. Tags nested beyond this limit are treated
+/// as literal text. This keeps rendering and drop both iterative in
+/// depth, so deeply nested input cannot overflow the stack.
+const MAX_NESTING_DEPTH: usize = 64;
+
 /// An RGB colour carried by a colour tag.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub struct Rgb {
@@ -124,6 +129,7 @@ struct Frame {
 struct Builder {
     root: Vec<Span>,
     open: Vec<Frame>,
+    literal_open: Vec<Wrap>,
     text: String,
 }
 
@@ -157,12 +163,39 @@ impl Builder {
     }
 
     fn open(&mut self, wrap: Wrap) {
+        if self.open.len() >= MAX_NESTING_DEPTH {
+            // Treat the tag as literal text at this depth.
+            return;
+        }
         self.flush();
         self.open.push(Frame {
             wrap,
             children: Vec::new(),
             reopened: false,
         });
+    }
+
+    fn markup(&mut self, wrap: Wrap, closing: bool, tag: &str) {
+        if closing {
+            if let Some(position) = self
+                .literal_open
+                .iter()
+                .rposition(|open| *open == wrap || (open.is_color() && wrap.is_color()))
+            {
+                self.literal_open.remove(position);
+            } else {
+                self.close(|open| open == wrap || (open.is_color() && wrap.is_color()));
+                return;
+            }
+        } else if self.open.len() >= MAX_NESTING_DEPTH || !self.literal_open.is_empty() {
+            self.literal_open.push(wrap);
+        } else {
+            self.open(wrap);
+            return;
+        }
+        self.text.push('<');
+        self.text.push_str(tag);
+        self.text.push('>');
     }
 
     fn pop_frame(&mut self) -> Option<Wrap> {
@@ -252,18 +285,22 @@ fn markup_tag(builder: &mut Builder, tag: &str, dialect: Format, voice: &mut Opt
         _ => None,
     };
     if let Some(wrap) = wrap {
-        if closing {
-            builder.close(|open| open == wrap);
-        } else {
-            builder.open(wrap);
-        }
+        builder.markup(wrap, closing, tag);
         return;
     }
     if name == "font" {
         if closing {
-            builder.close(Wrap::is_color);
+            builder.markup(
+                Wrap::Color(Rgb {
+                    red: 0,
+                    green: 0,
+                    blue: 0,
+                }),
+                true,
+                tag,
+            );
         } else if let Some(rgb) = font_colour(body) {
-            builder.open(Wrap::Color(rgb));
+            builder.markup(Wrap::Color(rgb), false, tag);
         } else {
             builder.emit(Span::Raw(tag.to_owned()));
         }
@@ -709,6 +746,32 @@ mod tests {
             assert_eq!(back, original, "{source:?}");
             let srt = render(&back, Format::Srt).text;
             assert_eq!(parse(&srt, Format::Srt).spans, original, "{source:?}");
+        }
+    }
+
+    #[test]
+    fn deeply_nested_tags_do_not_overflow_the_stack() {
+        // 32,768 nested bold tags.
+        let n = 32_768;
+        let input = format!("{}{}{}", "<b>".repeat(n), "x", "</b>".repeat(n));
+        let parsed = parse(&input, Format::Srt);
+        let rendered = render(&parsed.spans, Format::Ass);
+        assert!(rendered.text.contains('x'));
+        assert_eq!(rendered.text.matches("<b>").count(), n - MAX_NESTING_DEPTH);
+        assert_eq!(rendered.text.matches("</b>").count(), n - MAX_NESTING_DEPTH);
+    }
+
+    #[test]
+    fn tags_beyond_the_nesting_limit_stay_literal() {
+        for dialect in [Format::Srt, Format::Vtt] {
+            let input = format!(
+                "{}<i>x</i>{}",
+                "<b>".repeat(MAX_NESTING_DEPTH),
+                "</b>".repeat(MAX_NESTING_DEPTH)
+            );
+            let parsed = parse(&input, dialect);
+            assert_eq!(render(&parsed.spans, dialect).text, input);
+            assert!(render(&parsed.spans, Format::Ass).text.contains("<i>x</i>"));
         }
     }
 }

@@ -1,7 +1,7 @@
 //! Allocation gate for the streaming iterators.
 //!
-//! Every cue costs at most eight allocations plus a per-file constant, and
-//! the count does not grow with the number of lines in a cue. The counter is
+//! Each cue costs at most 1 allocation for SRT, 3 for WebVTT, and 5 for ASS,
+//! plus a per-file constant. Counts do not grow with lines per cue. The counter is
 //! thread local, so allocations made by the test harness on other threads do
 //! not leak into a measurement.
 
@@ -51,7 +51,9 @@ fn measured(run: impl FnOnce() -> usize) -> (usize, usize) {
 type Stream = fn(&[u8]) -> usize;
 type Generate = fn(usize, usize) -> Vec<u8>;
 
-const PER_CUE: usize = 8;
+const PER_CUE_SRT: usize = 1;
+const PER_CUE_VTT: usize = 3;
+const PER_CUE_ASS: usize = 5;
 const PER_FILE: usize = 96;
 
 fn timing(index: usize, separator: char) -> String {
@@ -157,16 +159,16 @@ fn stream_ass(input: &[u8]) -> usize {
 #[test]
 fn streaming_allocations_are_bounded_per_cue_on_the_perf_shapes() {
     let count = 500;
-    let cases: [(&str, Vec<u8>, Stream); 3] = [
-        ("srt", support::perf_srt(count), stream_srt),
-        ("vtt", support::perf_vtt(count), stream_vtt),
-        ("ass", support::perf_ass(count), stream_ass),
+    let cases: [(&str, Vec<u8>, Stream, usize); 3] = [
+        ("srt", support::perf_srt(count), stream_srt, PER_CUE_SRT),
+        ("vtt", support::perf_vtt(count), stream_vtt, PER_CUE_VTT),
+        ("ass", support::perf_ass(count), stream_ass, PER_CUE_ASS),
     ];
-    for (name, input, stream) in cases {
+    for (name, input, stream, per_cue) in cases {
         let (yielded, allocations) = measured(|| stream(&input));
         assert_eq!(yielded, count, "{name}");
         assert!(
-            allocations <= count * PER_CUE + PER_FILE,
+            allocations <= count * per_cue + PER_FILE,
             "{name} used {allocations} allocations for {count} cues"
         );
     }
@@ -175,19 +177,19 @@ fn streaming_allocations_are_bounded_per_cue_on_the_perf_shapes() {
 #[test]
 fn streaming_allocations_do_not_grow_with_lines_per_cue() {
     let count = 400;
-    let cases: [(&str, Generate, Stream); 3] = [
-        ("srt", srt_input, stream_srt),
-        ("vtt", vtt_input, stream_vtt),
-        ("ass", ass_input, stream_ass),
+    let cases: [(&str, Generate, Stream, usize); 3] = [
+        ("srt", srt_input, stream_srt, PER_CUE_SRT),
+        ("vtt", vtt_input, stream_vtt, PER_CUE_VTT),
+        ("ass", ass_input, stream_ass, PER_CUE_ASS),
     ];
-    for (name, generate, stream) in cases {
+    for (name, generate, stream, per_cue) in cases {
         let mut counts = Vec::new();
         for lines_per_cue in [1, 4, 16] {
             let input = generate(count, lines_per_cue);
             let (yielded, allocations) = measured(|| stream(&input));
             assert_eq!(yielded, count, "{name} with {lines_per_cue} lines");
             assert!(
-                allocations <= count * PER_CUE + PER_FILE,
+                allocations <= count * per_cue + PER_FILE,
                 "{name} with {lines_per_cue} lines used {allocations} allocations"
             );
             counts.push(allocations);

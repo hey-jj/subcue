@@ -77,7 +77,7 @@ assert!(cues.next().is_none());
 
 `VttCues` reads the signature and header in its constructor. `AssCues` reads
 script and style metadata there. Each iterator keeps one line buffer and one
-text accumulator, allocates once per yielded cue, and exposes its collected
+text accumulator, allocates 1 time per cue for SRT, 3 for WebVTT, and 5 for ASS, and exposes its collected
 warnings. A failed read from the source is returned as `Error::Io`.
 
 ## Errors and warnings

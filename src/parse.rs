@@ -1140,7 +1140,8 @@ pub(crate) fn parse_ass_stream_event(
         return Ok((None, warnings));
     };
     let field_count = format.map_or(EVENT_FORMAT.len(), <[String]>::len);
-    let values: Vec<&str> = value.splitn(field_count, ',').collect();
+    let mut values = Vec::with_capacity(field_count);
+    values.extend(value.splitn(field_count, ','));
     if values.len() != field_count {
         warnings.push(Warning::FieldCountMismatch {
             line: line_number,

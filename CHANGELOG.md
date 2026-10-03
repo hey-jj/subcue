@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.1 - 2026-10-03
+
+- Limit parsed span nesting to 64 levels to prevent stack overflow during
+  conversion. Deeper markup tags stay literal text.
+- Enforce streaming allocation bounds of 1 per SRT cue, 3 per WebVTT cue,
+  and 5 per ASS cue, and state those bounds in README.
+- Correct the SRT45 byte offset and ASS40, ASS44, and ASS45 line numbers
+  in conformance-vectors.json.
+
 ## 0.1.0 - 2026-09-02
 
 ### Added

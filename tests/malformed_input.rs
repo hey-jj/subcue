@@ -357,3 +357,17 @@ fn streaming_reads_a_styles_section_that_follows_the_events() {
     assert!(!cues.warnings().contains(&Warning::MissingStyles));
     assert!(!whole.warnings.contains(&Warning::MissingStyles));
 }
+
+#[test]
+fn deeply_nested_srt_tags_convert_without_overflow() {
+    let n = 32_768;
+    let input = format!(
+        "1\n00:00:01,000 --> 00:00:02,000\n{}{}{}\n\n",
+        "<b>".repeat(n),
+        "x",
+        "</b>".repeat(n)
+    );
+    let subs = parse_srt(input.as_bytes()).unwrap();
+    let converted = subs.convert(Format::Ass);
+    assert_eq!(converted.cues.len(), 1);
+}

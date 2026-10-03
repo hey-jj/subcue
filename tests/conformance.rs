@@ -9,38 +9,6 @@ fn document() -> Value {
     serde_json::from_str(include_str!("../conformance-vectors.json")).unwrap()
 }
 
-/// Records whose pinned coordinate is not the physical one.
-///
-/// Each entry names the record, the field, the value the shipped record
-/// pins, and the physical value the parser reports. The record for SRT45
-/// pins the byte before the invalid one: the 0xFF byte is at offset 36 and
-/// offset 35 is the space before it. The three ASS records pin line 20 for
-/// a Dialogue line that is physical line 18 of an 18-line file with LF
-/// endings and no byte order mark. Line numbers are one-based physical
-/// lines after byte order mark removal and offsets are physical byte
-/// positions, so the parser reports the physical value. When a record is
-/// corrected, its entry here fails and must be removed.
-const PHYSICAL_COORDINATES: [(&str, &str, u64, usize); 4] = [
-    ("SRT45", "offset", 35, 36),
-    ("ASS40", "line", 20, 18),
-    ("ASS44", "line", 20, 18),
-    ("ASS45", "line", 20, 18),
-];
-
-fn physical_coordinate(record: &Value, field: &str, pinned: u64) -> usize {
-    let id = record["id"].as_str().unwrap();
-    match PHYSICAL_COORDINATES
-        .iter()
-        .find(|entry| entry.0 == id && entry.1 == field)
-    {
-        Some((_, _, stale, physical)) => {
-            assert_eq!(pinned, *stale, "{id} was corrected; drop its entry");
-            *physical
-        }
-        None => pinned as usize,
-    }
-}
-
 fn format(value: &str) -> Format {
     match value {
         "srt" => Format::Srt,
@@ -237,11 +205,11 @@ fn assert_error(record: &Value, error: &Error) {
         expect["error"].as_str().unwrap()
     );
     if let Some(line) = expect["line"].as_u64() {
-        let line = physical_coordinate(record, "line", line);
+        let line = line as usize;
         assert_eq!(support::error_line(error), Some(line), "{}", record["id"]);
     }
     if let Some(offset) = expect["offset"].as_u64() {
-        let offset = physical_coordinate(record, "offset", offset);
+        let offset = offset as usize;
         assert_eq!(
             support::error_offset(error),
             Some(offset),
